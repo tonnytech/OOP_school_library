@@ -1,32 +1,27 @@
 class Person
-    def initialize(id, age, name = "Unknown", parent_permission = true)
-        @id = id
-        @name = name
-        @age = age 
-        @parent_permission = parent_permission            
-    end
+  def initialize(id, age, name = 'Unknown', parent_permission: true)
+    @id = id
+    @name = name
+    @age = age
+    @parent_permission = parent_permission
+  end
 
-# getters
+  # getters
 
-    attr_reader :id
-    attr_reader :name
-    attr_reader :age
-# setters
-    attr_writer :name
-    attr_writer :age
+  attr_accessor :name, :age
+  attr_reader :id
 
-# -------------------
+  # setters
 
-def of_age?
-   @age >= 18
-end
+  # -------------------
 
-public
+  def of_age?
+    @age >= 18
+  end
 
-def can_use_services?
+  def can_use_services?
     of_age? || @parent_permission
-end
-
+  end
 end
 
 # person = Person.new(1,2,"Alice")
