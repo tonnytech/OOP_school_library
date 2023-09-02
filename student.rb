@@ -5,7 +5,6 @@ class Student < Person
 
   def initialize(age, name, parent_permission)
     super(age, name, parent_permission: parent_permission)
-    @classroom = classroom
     @category = 'Student'
   end
 
