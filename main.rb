@@ -1,45 +1,60 @@
 require_relative 'app'
 
 class Menu
-  attr_accessor :choice
-
   def initialize
     @app = App.new
   end
 
-  def menu_list
+  def run
+    puts 'welcome to school library app!'
+    menu
+  end
+
+  def menu
     loop do
-      puts ' ' * 10
-      puts 'Enter a number from 1 to 7 to pick your option:'
-      puts '1 - List of all books available'
-      puts '2 - List of all people available'
-      puts '3 - Add a person'
-      puts '4 - Add a book'
-      puts '5 - Add a rental'
-      puts '6 - List all rentals for a person id'
-      puts '7 - Exit the library'
+      puts ''
+      puts 'Please choose an option by entering a number:'
+      puts '1 - list all books'
+      puts '2 - list all people'
+      puts '3 - Create a person'
+      puts '4 - Create a book'
+      puts '5 - Create a rental'
+      puts '6 - List all rentals for a given person id'
+      puts '7 - Exit'
       puts ''
 
-      choice = gets.chomp.to_i
+      option = gets.chomp.to_i
+      chosen(option)
 
-      case choice
-      when 1..6 then @app.chosen(choice)
-      when 7 then puts 'Thank you for using this application, come back soon.'
-      end
-      break if choice == 7
+      exit if option == 7
+
+      break if option == 7
     end
   end
 
-  def main
-    @app.chosen(choice)
+  def chosen(option)
+    case option
+    when 1
+      @app.list_all_books
+    when 2
+      @app.list_all_people
+    when 3
+      puts 'Do you want to create a student (1) or a teacher (2)?'
+      person_type = gets.chomp.to_i
+      @app.create_a_person(person_type)
+    when 4
+      @app.create_a_book
+    when 5
+      @app.create_a_rental
+    when 6
+      @app.list_all_rentals
+    end
   end
 
-  def start
-    puts 'School library App!'
-    menu_list
+  def exit
+    puts 'Thank you for using this app!'
   end
 end
 
-start_app = Menu.new
-start_app.main
-start_app.start
+menu = Menu.new
+menu.run
