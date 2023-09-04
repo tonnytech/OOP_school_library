@@ -40,7 +40,6 @@ class Menu
   end
 end
 
-
 start_app = Menu.new
 start_app.main
 start_app.start
