@@ -1,8 +1,8 @@
 require_relative 'app'
 
 class Menu
-
   attr_accessor :choice
+
   def initialize
     @app = App.new
   end
@@ -38,10 +38,9 @@ class Menu
     puts 'School library App!'
     menu_list
   end
-
 end
 
 
-startApp = Menu.new()
+startApp = Menu.new
 startApp.main
 startApp.start
