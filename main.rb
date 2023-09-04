@@ -41,6 +41,6 @@ class Menu
 end
 
 
-startApp = Menu.new
-startApp.main
-startApp.start
+start_app = Menu.new
+start_app.main
+start_app.start
