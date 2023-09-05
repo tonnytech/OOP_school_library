@@ -13,11 +13,6 @@ class App
     @rentals = []
   end
 
-  def start
-    puts 'School library App!'
-    menu
-  end
-
   def list_all_books
     if @books.empty?
       puts 'Books folder is empty'
@@ -38,44 +33,24 @@ class App
     end
   end
 
-  def create_a_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    category = gets.chomp.to_i
-    case category
-    when 1
-      create_a_student
-    when 2
-      create_a_teacher
-    else
-      puts 'Please Enter a valid number, 1 or 2'
-    end
-  end
-
-  def create_a_student
-    print 'Enter Age: '
-    age = gets.chomp.to_i
-    puts "Age is #{age}"
-    print 'Enter Name: '
-    name = gets.chomp
-    puts "name is #{name}"
-    print 'Has parent permission? [Y/N]: '
-    permission = gets.chomp
-    puts "permission is #{permission}"
-    person = Student.new(age, name, permission)
-    @people.push(person)
-    puts "Student #{name} added successfully"
-  end
-
-  def create_a_teacher
+  def create_a_person(person_type)
     print 'Age: '
     age = gets.chomp.to_i
     print 'Name: '
     name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-    person = Teacher.new(age, specialization, name)
-    @people.push(person)
-    puts "Teacher '#{name}' created successfully"
+    if person_type == 1
+      print 'Has parent permission? (Y/N): '
+      permission = gets.chomp
+      person = Student.new(age, name, permission)
+      @people.push(person)
+      puts "Student #{person.name} was created successfully with ID #{person.id}"
+    elsif person_type == 2
+      print 'Specialization: '
+      specialization = gets.chomp
+      person = Teacher.new(age, specialization, name)
+      @people.push(person)
+      puts "Teacher #{name} was created successfully with ID #{person.id}"
+    end
   end
 
   def create_a_book

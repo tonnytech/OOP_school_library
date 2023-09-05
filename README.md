@@ -29,8 +29,11 @@
 <!-- PROJECT DESCRIPTION -->
 
 # 📖 School Library <a name="about-project"></a>
+
 <!-- write description for me -->
+
 **School Library** is app where users can
+
 - Add new students or teachers.
 - Add new books.
 - Save records of who borrowed a given book and when.
@@ -104,14 +107,17 @@ it will install the required gemfile for running the project
 - Twitter: [@tonnytei](https://twitter.com/tonnytech)
 - LinkedIn: [Tonny Tei](https://www.linkedin.com/in/tonnytei/)
 
+👤 **OMAIDU OTHNIEL**
 
+> - GitHub: [OMAIDU OTHNIEL](https://github.com/othniel2471)
+> - Twitter: [OMAIDU OTHNIEL](https://twitter.com/@Oomaidu)
+> - LinkedIn: [OMAIDU OTHNIEL](https://www.linkedin.com/in/othniel-omaidu-3350a9164)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
 
 ## 🔭 Future Features <a name="future-features"></a>
-
 
 - **Add Ui**
 
