@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'book'
 require_relative 'person'
 require_relative 'student'
@@ -11,6 +12,62 @@ class App
     @books = []
     @people = []
     @rentals = []
+  end
+
+  def read_data
+    File.new('Data/people.json', 'w') unless File.exist?('Data/people.json')
+    File.new('Data/books.json', 'w') unless File.exist?('Data/books.json')
+    File.new('Data/rentals.json', 'w') unless File.exist?('Data/rentals.json')
+    people_json = File.read('Data/people.json')
+    if people_json.length.positive? 
+      people = JSON.parse(people_json)
+      people.each do |person|
+        if person['type'] == 'student'
+          @people.push(Student.new(person['age'], person['name'], person['parent_permission']))
+        elsif person['type'] == 'teacher'
+          @people.push(Teacher.new(person['age'], person['specialization'], person['name']))
+        end
+      end
+    end
+    books_json = File.read('Data/books.json')
+    # books = JSON.parse(books_json)
+    books.each do |book|
+      @books.push(Book.new(book['title'], book['author']))
+    end
+    rentals_json = File.read('Data/rentals.json')
+    # rentals = JSON.parse(rentals_json)
+    rentals.each do |rental|
+      book = @books.find { |book| book.title == rental['book_title'] }
+      person = @people.find { |person| person.name == rental['person_name'] }
+      @rentals.push(Rental.new(rental['date'], book, person))
+    end
+  end
+
+ def write_data
+    books = []
+    people = []
+    rentals = []
+
+    @books.each do |book|
+      books.push(title: book.title, author: book.author)
+    end
+
+    @people.each do |person|
+      if person.instance_of?(Student)
+        people.push(age: person.age, name: person.name,  parent_permission: person.permission, type: 'student')
+      elsif person.instance_of?(Teacher)
+        puts person.specialization
+        people.push(age: person.age, name: person.name, specialization: person.specialization, type: 'teacher')
+      end
+    end
+
+    @rentals.each do |rental|
+      rentals.push(date: rental.date, book_title: rental.book.title, person_name: rental.person.name)
+    end
+
+    File.write('Data/books.json', JSON.pretty_generate(books))
+    File.write('Data/people.json', JSON.pretty_generate(people))
+    File.write('Data/rentals.json', JSON.pretty_generate(rentals))
   end
 
   def list_all_books
@@ -41,6 +98,7 @@ class App
     if person_type == 1
       print 'Has parent permission? (Y/N): '
       permission = gets.chomp
+      puts permission
       person = Student.new(age, name, permission)
       @people.push(person)
       puts "Student #{person.name} was created successfully with ID #{person.id}"
